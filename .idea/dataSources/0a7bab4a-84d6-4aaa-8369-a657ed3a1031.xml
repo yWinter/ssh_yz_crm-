@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="MySQL - crm@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+    <schema id="1" name="crm">
+      <visible>1</visible>
+    </schema>
+    <schema id="2" name="bookstore"/>
+    <schema id="3" name="customers"/>
+    <schema id="4" name="exam"/>
+    <schema id="5" name="hi0703"/>
+    <schema id="6" name="information_schema"/>
+    <schema id="7" name="java0703"/>
+    <schema id="8" name="javademo"/>
+    <schema id="9" name="mydb1"/>
+    <schema id="10" name="mydb2"/>
+    <schema id="11" name="mydb3"/>
+    <schema id="12" name="mydb4"/>
+    <schema id="13" name="mydb5"/>
+    <schema id="14" name="mysql"/>
+    <schema id="15" name="performance_schema"/>
+    <schema id="16" name="prc"/>
+    <schema id="17" name="sshdemo"/>
+    <schema id="18" name="strutsTest"/>
+    <schema id="19" name="sys"/>
+  </database-model>
+</dataSource>
