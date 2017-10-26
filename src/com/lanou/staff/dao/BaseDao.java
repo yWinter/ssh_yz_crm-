@@ -14,7 +14,7 @@ public interface BaseDao<T> {
      * @param t 要保存的对象
      * @return 保存之后的对象
      **/
-    T save(T t);
+    void save(T t);
 
     /**
      * 删除某个对象
@@ -32,10 +32,9 @@ public interface BaseDao<T> {
     /**
      * 根据主键id 查询某个对象
      * @param id  要查询的主键 id
-     * @param tClass 返回对象的类声明
      */
 
-    T findById(Serializable id, Class<T> tClass);
+    T findById(Serializable id);
 
 
     /**
@@ -52,15 +51,10 @@ public interface BaseDao<T> {
      * @param params 查询语句的参数列表
      * @return 查询到的结果集合
      **/
-    List<T> find(String hql, Map<String, Object> params);
+    List<T> find(String hql, Object[] params);
 
-    /**
-     * 根据条件查询，返回查询到的第一个对象
-     *
-     * @param hql    查询语句
-     * @param params 查询语句的参数列表
-     * @return 第一个查询到的对象
-     **/
-    T findSingle(String hql, Map<String, Object> params);
+
+    void saveOrUpdate(T t);
+
 
 }

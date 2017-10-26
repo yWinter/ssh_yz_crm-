@@ -13,8 +13,10 @@ public interface DepartmentService {
 
     List<Department> findAll();
 
+    Department findById(String depID);
 
+    void save(Department department);
 
-    List<Department> find(String hql, Map<String, Object> param);
+    void saveOrUpdate(Department department);
 
 }

@@ -15,7 +15,10 @@ import com.lanou.staff.service.impl.DepartmentServiceImpl;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.HashMap;
 
@@ -26,19 +29,25 @@ import java.util.Map;
  * Created by 蓝鸥科技有限公司  www.lanou3g.com.
  */
 public class MainTest {
-    private SessionFactory sessionFactory;
 
+
+    private ApplicationContext context;
+
+    @Before
+    public void init(){
+        context = new ClassPathXmlApplicationContext("spring-config.xml");
+    }
 
     /**
      * 插入原始数据
      **/
     @Test
     public void save() {
-        Session session = sessionFactory.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
 
+        DepartmentDao departmentDao = (DepartmentDao) context.getBean("departmentDao");
+        StaffDao staffDao = (StaffDao) context.getBean("staffDao");
         //创建数据
-        Department department = new Department("教学部");
+        Department department = new Department("教研部");
         Post post = new Post("教学总监");
         Post post1 = new Post("Java主管");
         Post post2 = new Post("Java讲师");
@@ -47,7 +56,7 @@ public class MainTest {
         department.getPosts().add(post1);
         department.getPosts().add(post2);
 
-        session.save(department);//保存教学部
+        departmentDao.save(department);//保存教学部
 
         Department department1 = new Department("职规部");
         Post post3 = new Post("职规主管");
@@ -56,28 +65,28 @@ public class MainTest {
         department1.getPosts().add(post3);
         department1.getPosts().add(post4);
 
-        session.save(department1);//保存职规部
+        departmentDao.save(department1);//保存职规部
 
         /**
          * 教学部
          */
-        // 1
+        // 1MySQL - crm@localhost
         Staff staff1 = new Staff("李忠仁");
         staff1.setPostID(post);//教学总监
-        session.save(staff1);//保存李忠仁
+        staffDao.save(staff1);//保存李忠仁
 
         // 2
         Staff staff2 = new Staff("萌小义");
         staff2.setPostID(post1);//班主任
-        session.save(staff2);//保存萌小义
+        staffDao.save(staff2);//保存萌小义
         // 3
         Staff staff3 = new Staff("大表姐");
         staff3.setPostID(post2);//java讲师
-        session.save(staff3);//保存大表姐
+        staffDao.save(staff3);//保存大表姐
         // 4
         Staff staff4 = new Staff("武神");
         staff4.setPostID(post2);//java讲师
-        session.save(staff4);//保存武神
+        staffDao.save(staff4);//保存武神
 
         /**
          * 职规部
@@ -85,17 +94,16 @@ public class MainTest {
         // 1
         Staff staff5 = new Staff("马琳");
         staff5.setPostID(post3);//职规主管
-        session.save(staff5);//保存马琳
+        staffDao.save(staff5);//保存马琳
         // 2
         Staff staff6 = new Staff("欣姐");
         staff6.setPostID(post4);//班主任
-        session.save(staff6);//保存欣姐
+        staffDao.save(staff6);//保存欣姐
         // 3
         Staff staff7 = new Staff("竹青姐");
         staff7.setPostID(post4);//班主任
-        session.save(staff7);//保存竹青姐
+        staffDao.save(staff7);//保存竹青姐
 
-        transaction.commit();
     }
 
 
@@ -131,13 +139,6 @@ public class MainTest {
             System.out.println(staff + "  " + staff.getPostID());
         }
 
-        //查询名字叫大表姐的员工
-        String hql = "from Staff where sname=:name";
-        Map<String, Object> params = new HashMap<>();
-        params.put("name", "大表姐");
-
-        Staff staff = staffDao.findSingle(hql, params);
-        System.out.println(staff);
     }
 
     @Test
@@ -153,4 +154,5 @@ public class MainTest {
             }
         }
     }
+
 }

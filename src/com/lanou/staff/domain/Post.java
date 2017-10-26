@@ -7,19 +7,19 @@ public class Post {
 
     private String postId;
     private String postName;
-    private Department depId;
+    private String depId;
 
     public Post(){
 
     }
 
-    public Post(String postId, String postName) {
-        this.postId = postId;
+    public Post(String postName) {
         this.postName = postName;
     }
 
-    public Post(String postName) {
+    public Post(String postName, String depId) {
         this.postName = postName;
+        this.depId = depId;
     }
 
     @Override
@@ -47,11 +47,11 @@ public class Post {
         this.postName = postName;
     }
 
-    public Department getDepId() {
+    public String getDepId() {
         return depId;
     }
 
-    public void setDepId(Department depId) {
+    public void setDepId(String depId) {
         this.depId = depId;
     }
 }

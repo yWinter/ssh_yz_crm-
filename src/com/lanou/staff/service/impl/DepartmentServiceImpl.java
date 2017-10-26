@@ -4,7 +4,9 @@ import com.lanou.staff.dao.DepartmentDao;
 import com.lanou.staff.dao.impl.DepartmentDaoImpl;
 import com.lanou.staff.domain.Department;
 import com.lanou.staff.service.DepartmentService;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -15,19 +17,34 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     private DepartmentDao departmentDao;
 
-    public DepartmentServiceImpl() {
-        departmentDao = new DepartmentDaoImpl();
-    }
-
     @Override
     public List<Department> findAll() {
         String hql = "from Department";
         return departmentDao.findAll(hql);
     }
 
+    @Override
+    public Department findById(String depID) {
+        Department department = departmentDao.findById(depID);
+        return department;
+    }
 
     @Override
-    public List<Department> find(String hql, Map<String, Object> param) {
-        return departmentDao.find(hql,param);
+    public void save(Department department) {
+        departmentDao.save(department);
+    }
+
+
+    @Override
+    public void saveOrUpdate(Department department) {
+        departmentDao.saveOrUpdate(department);
+    }
+
+    public DepartmentDao getDepartmentDao() {
+        return departmentDao;
+    }
+
+    public void setDepartmentDao(DepartmentDao departmentDao) {
+        this.departmentDao = departmentDao;
     }
 }
